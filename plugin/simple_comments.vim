@@ -2,8 +2,8 @@
 " simple_comments.vim - Simple script for commenting and uncommenting lines
 "
 " Author:  Anders Thøgersen <anders [at] bladre.dk>
-" Version: 1.2
-" Date:    31-Dec-2010
+" Version: 1.3
+" Date:    03-Apr-2011
 "
 " $Id$
 "
@@ -60,8 +60,9 @@ unlet g:simple_comments_Remove
 unlet g:simple_comments_Comment
 
 fun! s:SetCommentVars(comstr, name)
-    exe "let b:simple_comments_".a:name."left       = substitute('".a:comstr."', '\\(.*\\)%s.*', '\\1', '')"
-    exe "let b:simple_comments_".a:name."right      = substitute('".a:comstr."', '.*%s\\(.*\\)', '\\1', 'g')"
+    let str = escape(a:comstr, '"\\')
+    exe "let b:simple_comments_".a:name."left       = substitute(\"".str."\", '\\(.*\\)%s.*', '\\1', '')"
+    exe "let b:simple_comments_".a:name."right      = substitute(\"".str."\", '.*%s\\(.*\\)', '\\1', 'g')"
     exe "let b:simple_comments_".a:name."left_del   = substitute(b:simple_comments_".a:name."left, '\\s\\+', '', 'g')"
     exe "let b:simple_comments_".a:name."right_del  = substitute(b:simple_comments_".a:name."right, '\\s\\+', '', 'g')"
 endfun
