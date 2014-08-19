@@ -142,7 +142,7 @@ fun! s:DelComment()
     endif
     " Delete comments
     if stridx(line, b:simple_comments_left_del) != -1
-        exe ':silent! s/^\(\s*\)'.escape(b:simple_comments_left_del,'[].\\/*').'\s*/\1/'
+        exe ':silent! s/^\(\s*\)'.escape(b:simple_comments_left_del,'[].\\/*').'/\1/'
     endif
     if b:simple_comments_right != '' && stridx(line, b:simple_comments_right_del) != -1
         exe ':silent! s/'.escape(b:simple_comments_right_del,'[].\\/*').'\s*$//'
@@ -157,6 +157,7 @@ fun! s:DelComment()
 endfun
 
 fun! s:CommentRememberCursor(action) range
+    call s:SetAllCommentVars()
     let saveCursor = getpos(".")
     " Insertion and deletion of comments is done backwards to set the right
     " comments according to g:simple_comments_SyntaxDictionary 
@@ -176,7 +177,8 @@ fun! s:CommentRememberCursor(action) range
     call setpos('.', saveCursor)
 endfun
 
-command! -nargs=0 SimpleComments :call s:SetAllCommentVars()
+command! -nargs=1 SimpleComment :call <SID>CommentRememberCursor('C')<CR>
+nnoremap <buffer><silent> <Plug>SimpleComment :call <SID>CommentRememberCursor(<f-args>)<CR>
 
 augroup COMMENTS
     autocmd!
