@@ -63,7 +63,7 @@ let mapit = 'inoremap <Leader>!M <ESC>:call Comment!A(1)<CR>a
   \ | nnoremap !M :set operatorfunc=Comment!A<CR>g@'
 
 exe substitute(substitute(mapit, '!M', 'c', 'g'), '!A', 'Add', 'g')
-exe substitute(substitute(mapit, '!M', 'z', 'g'), '!A', 'Del', 'g')
+exe substitute(substitute(mapit, '!M', 'C', 'g'), '!A', 'Del', 'g')
 
 augroup scomments
   autocmd!
