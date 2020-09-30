@@ -45,14 +45,16 @@ if ! exists('g:simple_comments_SyntaxDictionary')
     let g:simple_comments_SyntaxDictionary = {}
 endif
 
-exe 'nmap <silent> '. g:simple_comments_Comment .' :call <SID>CommentRememberCursor("C")<CR>'
-exe 'nmap <silent> '. g:simple_comments_Remove  .' :call <SID>CommentRememberCursor("D")<CR>'
+if exists('g:simple_comments_mappings')
+  exe 'nmap <silent> '. g:simple_comments_Comment .' :call <SID>CommentRememberCursor("C")<CR>'
+  exe 'nmap <silent> '. g:simple_comments_Remove  .' :call <SID>CommentRememberCursor("D")<CR>'
 
-exe 'imap <silent> '. g:simple_comments_Comment .' <C-o>:call <SID>AddComment()<CR>'
-exe 'imap <silent> '. g:simple_comments_Remove  .' <C-o>:call <SID>DelComment()<CR>'
+  exe 'imap <silent> '. g:simple_comments_Comment .' <C-o>:call <SID>AddComment()<CR>'
+  exe 'imap <silent> '. g:simple_comments_Remove  .' <C-o>:call <SID>DelComment()<CR>'
 
-exe 'vmap <silent> '. g:simple_comments_Comment .' :call <SID>CommentRememberCursor("C")<CR>'
-exe 'vmap <silent> '. g:simple_comments_Remove  .' :call <SID>CommentRememberCursor("D")<CR>'
+  exe 'vmap <silent> '. g:simple_comments_Comment .' :call <SID>CommentRememberCursor("C")<CR>'
+  exe 'vmap <silent> '. g:simple_comments_Remove  .' :call <SID>CommentRememberCursor("D")<CR>'
+endif
 
 " Clean up 
 delfunction s:AddVar
